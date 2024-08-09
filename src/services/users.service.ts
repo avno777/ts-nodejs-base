@@ -1,24 +1,30 @@
 import { Request } from 'express'
-import orderModel from '../models/database/orders.model'
+import accountModel from '../models/database/accounts.models'
 import logger from '../configs/logger'
 import { FilterQuery } from 'mongoose'
+import { IRequest } from '~/models/interfaces/req.interface'
 // import createTimestamp from '../config/createTimestamp'
 // import logger from '../config/winston'
 // import { ICustomer } from '../models/database/driver.model'
 // import { ITimeStamp } from '../models/interfaces/timeStamp.interface'
 
-interface IOrderService {
+interface IAccountService {
   createData(data: any): Promise<any>
   getData(req: Request): Promise<{ total: number; data: any[] }>
-  getDataById(req: Request): Promise<any>
-  updateDataById(req: Request): Promise<any>
+  getDataById(_id: string): Promise<any>
+  updateDataById(_id: string, req: Request): Promise<any>
   deleteDataById(req: Request): Promise<any>
-  //getLocation(req: Request): Promise<any>
 }
-const OrderService: IOrderService = {
+interface RequestWithUser extends Request {
+  user?: {
+    _id: string
+  }
+}
+
+const AccountService: IAccountService = {
   async createData(data: any) {
     try {
-      const createdData = await orderModel.create(data)
+      const createdData = await accountModel.create(data)
       return createdData
     } catch (error) {
       logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
@@ -26,24 +32,20 @@ const OrderService: IOrderService = {
     }
   },
   async getData(req: Request) {
-    const allowedFields = ['orderCode', 'quantity', 'orderType', 'customerId', 'productId', 'supplierId', 'orderDate']
+    const allowedFields = ['fullname', 'email', 'phone', 'address']
     const page = parseInt(req.query.page as string) || 1
     const limit = parseInt(req.query.limit as string) || 10
     const skip = (page - 1) * limit
 
     const conditions: FilterQuery<any>[] = allowedFields
       .map((field) => {
-        if (
-          field === 'orderCode' ||
-          field === 'quantity' ||
-          field === 'orderType' ||
-          field === 'customerId' ||
-          field === 'productId' ||
-          field === 'supplierId' ||
-          field === 'orderDate'
-        ) {
+        if (field === 'fullName' || field === 'email' || field === 'phone' || field === 'address') {
           if (req.query[field]) {
             return { [field]: { $regex: req.query[field], $options: 'i' } }
+          }
+        } else if (field === 'allowedElevator') {
+          if (req.query[field]) {
+            return { [field]: { $in: [req.query[field]] } }
           }
         } else if (req.query[field]) {
           return { [field]: req.query[field] }
@@ -63,8 +65,8 @@ const OrderService: IOrderService = {
       })
     }
 
-    const _data = await orderModel.find({ $and: conditions }).skip(skip).limit(limit).lean().exec()
-    const count = await orderModel.countDocuments({ $and: conditions })
+    const _data = await accountModel.find({ $and: conditions }).skip(skip).limit(limit).lean().exec()
+    const count = await accountModel.countDocuments({ $and: conditions })
     const totalPages = Math.ceil(count / limit)
     return {
       total: count,
@@ -75,21 +77,19 @@ const OrderService: IOrderService = {
     }
   },
 
-  async getDataById(req: Request) {
+  async getDataById(_id: string) {
     try {
-      const dataId = req.params.id
-      const data = await orderModel.findById(dataId)
+      const data = await accountModel.findById(_id)
       return data
     } catch (error) {
       logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
       throw error
     }
   },
-  async updateDataById(req: Request) {
+  async updateDataById(_id: string, req: Request) {
     try {
-      const dataId = req.body.id ? req.body.id : req.params.id
       const data = req.body
-      const updatedData = await orderModel.findByIdAndUpdate(dataId, data, { new: true })
+      const updatedData = await accountModel.findByIdAndUpdate(_id, data, { new: true })
       return updatedData
     } catch (error) {
       logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
@@ -97,29 +97,15 @@ const OrderService: IOrderService = {
     }
   },
 
-  async deleteDataById(req: Request) {
+  async deleteDataById(req: IRequest) {
     try {
-      const dataId = req.body.id ? req.body.id : req.params.id
-      await orderModel.findByIdAndDelete(dataId)
+      const dataId = req.user?._id ?? ''
+      await accountModel.findByIdAndDelete(dataId)
     } catch (error) {
       logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
       throw error
     }
   }
-  // async getLocation(req: Request) {
-  //   try {
-  //     const dataId = req.params.id
-  //     const data = await orderModel.findById(dataId)
-  //     let result
-  //     if(data !== null) {
-  //       result = { data.location, data.trackingTime }
-  //     }
-  //     return result
-  //   } catch (error) {
-  //     logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
-  //     throw error
-  //   }
-  // }
 }
 
-export default OrderService
+export default AccountService

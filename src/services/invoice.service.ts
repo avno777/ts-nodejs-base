@@ -1,5 +1,5 @@
 import { Request } from 'express'
-import orderModel from '../models/database/orders.model'
+import invoiceModel from '../models/database/invoice.model'
 import logger from '../configs/logger'
 import { FilterQuery } from 'mongoose'
 // import createTimestamp from '../config/createTimestamp'
@@ -7,7 +7,7 @@ import { FilterQuery } from 'mongoose'
 // import { ICustomer } from '../models/database/driver.model'
 // import { ITimeStamp } from '../models/interfaces/timeStamp.interface'
 
-interface IOrderService {
+interface IInvoiceService {
   createData(data: any): Promise<any>
   getData(req: Request): Promise<{ total: number; data: any[] }>
   getDataById(req: Request): Promise<any>
@@ -15,10 +15,10 @@ interface IOrderService {
   deleteDataById(req: Request): Promise<any>
   //getLocation(req: Request): Promise<any>
 }
-const OrderService: IOrderService = {
+const InvoiceService: IInvoiceService = {
   async createData(data: any) {
     try {
-      const createdData = await orderModel.create(data)
+      const createdData = await invoiceModel.create(data)
       return createdData
     } catch (error) {
       logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
@@ -63,8 +63,8 @@ const OrderService: IOrderService = {
       })
     }
 
-    const _data = await orderModel.find({ $and: conditions }).skip(skip).limit(limit).lean().exec()
-    const count = await orderModel.countDocuments({ $and: conditions })
+    const _data = await invoiceModel.find({ $and: conditions }).skip(skip).limit(limit).lean().exec()
+    const count = await invoiceModel.countDocuments({ $and: conditions })
     const totalPages = Math.ceil(count / limit)
     return {
       total: count,
@@ -78,7 +78,7 @@ const OrderService: IOrderService = {
   async getDataById(req: Request) {
     try {
       const dataId = req.params.id
-      const data = await orderModel.findById(dataId)
+      const data = await invoiceModel.findById(dataId)
       return data
     } catch (error) {
       logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
@@ -89,7 +89,7 @@ const OrderService: IOrderService = {
     try {
       const dataId = req.body.id ? req.body.id : req.params.id
       const data = req.body
-      const updatedData = await orderModel.findByIdAndUpdate(dataId, data, { new: true })
+      const updatedData = await invoiceModel.findByIdAndUpdate(dataId, data, { new: true })
       return updatedData
     } catch (error) {
       logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
@@ -100,7 +100,7 @@ const OrderService: IOrderService = {
   async deleteDataById(req: Request) {
     try {
       const dataId = req.body.id ? req.body.id : req.params.id
-      await orderModel.findByIdAndDelete(dataId)
+      await invoiceModel.findByIdAndDelete(dataId)
     } catch (error) {
       logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
       throw error
@@ -109,7 +109,7 @@ const OrderService: IOrderService = {
   // async getLocation(req: Request) {
   //   try {
   //     const dataId = req.params.id
-  //     const data = await orderModel.findById(dataId)
+  //     const data = await invoiceModel.findById(dataId)
   //     let result
   //     if(data !== null) {
   //       result = { data.location, data.trackingTime }
@@ -122,4 +122,4 @@ const OrderService: IOrderService = {
   // }
 }
 
-export default OrderService
+export default InvoiceService

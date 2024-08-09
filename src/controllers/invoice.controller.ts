@@ -1,11 +1,11 @@
 import { Request, Response } from 'express'
-import orderService from '../services/customer.service' // Đảm bảo rằng bạn đã import đúng service
+import invoiceService from '../services/invoice.service' // Đảm bảo rằng bạn đã import đúng service
 import { IRequest } from '../models/interfaces/req.interface'
 
-const OrderController = {
+const InvoiceController = {
   createData: async function (req: IRequest, res: Response): Promise<void> {
     try {
-      const createdData = await orderService.createData(req)
+      const createdData = await invoiceService.createData(req)
       res.status(201).json({ message: 'Create new  data successfully', createdData })
     } catch (error: any) {
       res.status(500).json({ error: error.message })
@@ -13,7 +13,7 @@ const OrderController = {
   },
   getData: async function (req: IRequest, res: Response): Promise<void> {
     try {
-      const _data = await orderService.getData(req)
+      const _data = await invoiceService.getData(req)
       res.status(200).json({ message: 'Get data successfully', _data })
     } catch (error: any) {
       res.status(500).json({ error: error.message })
@@ -21,7 +21,7 @@ const OrderController = {
   },
   getDataById: async function (req: IRequest, res: Response): Promise<void> {
     try {
-      const data = await orderService.getDataById(req)
+      const data = await invoiceService.getDataById(req)
       if (!data) {
         res.status(404).json({ message: 'Data not found' })
       }
@@ -32,7 +32,7 @@ const OrderController = {
   },
   updateDataById: async function (req: IRequest, res: Response): Promise<void> {
     try {
-      const updatedData = await orderService.updateDataById(req)
+      const updatedData = await invoiceService.updateDataById(req)
       if (!updatedData) {
         res.status(404).json({ message: 'Data not found' })
       }
@@ -43,7 +43,7 @@ const OrderController = {
   },
   deleteDataById: async function (req: IRequest, res: Response): Promise<void> {
     try {
-      const deletedData = await orderService.deleteDataById(req)
+      const deletedData = await invoiceService.deleteDataById(req)
       if (!deletedData) {
         res.status(404).json({ message: 'Data not found' })
       }
@@ -54,4 +54,4 @@ const OrderController = {
   }
 }
 
-export default OrderController
+export default InvoiceController
