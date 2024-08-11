@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import accountService from '../services/account.service' // Đảm bảo rằng bạn đã import đúng service
+import accountService from '../services/users.service' // Đảm bảo rằng bạn đã import đúng service
 import { IRequest } from '../models/interfaces/req.interface'
 import { response200, response400, response500 } from '~/utils/apiResponse'
 import jsonRes from '~/utils/jsonRes'

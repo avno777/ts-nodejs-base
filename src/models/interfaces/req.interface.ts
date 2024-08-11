@@ -7,6 +7,7 @@ export interface IRequest extends Request {
     [key: string]: any
   }
   user?: {
-    _id: string
+    _id?: string
+    [key: string]: any
   }
 }

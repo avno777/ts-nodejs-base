@@ -1,8 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { JwtPayload } from 'jsonwebtoken'
 import authService from '../services/auth.service'
-import { IAccount } from '../models/database/accounts.models'
-import accountService from '../services/account.service'
+import { IUser } from '../models/database/users.models'
 import { IRequest } from '~/models/interfaces/req.interface'
 import { response400, response401, response403, response500 } from '~/utils/apiResponse'
 import jsonRes from '~/utils/jsonRes'
@@ -33,7 +32,7 @@ const authorizeRoles = (...allowedRoles: string[]) => {
   return async (req: IRequest, res: Response, next: NextFunction): Promise<Response | void> => {
     try {
       const accountId = req.user?._id
-      const user: IAccount | null = await authService.findByKeyword({ accountId }, '_id')
+      const user: IUser | null = await authService.findByKeyword({ accountId }, '_id')
       if (!req.user || !user || !allowedRoles.includes(user.role)) {
         //return res.status(403).json({ message: 'Access denied!!!' })
         return response403(res, jsonRes.ACCESS_DENIED)
