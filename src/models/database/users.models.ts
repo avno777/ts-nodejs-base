@@ -32,7 +32,6 @@ const userSchema: Schema = new Schema(
     },
     displayName: {
       type: String,
-      required: true,
       lowercase: true,
       trim: true
     },

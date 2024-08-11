@@ -13,7 +13,7 @@ router.post('/verify-otp-forGot', authController.verifyOtpForGot)
 router.post('/change-password', authController.changePasswordController)
 router.post('/reset-password', authController.changePasswordController)
 router.post('/logout', authController.logoutController)
-router.post('/google', authController.googleLogin)
-router.post('/google/callback', authController.googleCallback)
+router.get('/google', authController.googleLogin)
+router.get('/google/callback', authController.googleCallback)
 
 export default router
