@@ -63,10 +63,10 @@ const userSchema: Schema = new Schema(
     isAdmin: { type: Boolean, default: false },
     isActive: { type: Boolean, default: false },
     isDeleted: { type: Boolean, default: false },
-    followers: [{ type: Schema.Types.ObjectId, ref: 'AccountModel' }],
-    following: [{ type: Schema.Types.ObjectId, ref: 'AccountModel' }],
-    readingHistory: [{ type: Schema.Types.ObjectId, ref: 'AccountModel' }],
-    readingLists: [{ type: Schema.Types.ObjectId, ref: 'AccountModel' }],
+    followers: [{ type: Schema.Types.ObjectId, ref: 'UserModel' }],
+    following: [{ type: Schema.Types.ObjectId, ref: 'UserModel' }],
+    readingHistory: [{ type: Schema.Types.ObjectId, ref: 'UserModel' }],
+    readingLists: [{ type: Schema.Types.ObjectId, ref: 'UserModel' }],
 
     otp: { type: String, length: 6, select: false },
     otpTime: Date
@@ -74,5 +74,5 @@ const userSchema: Schema = new Schema(
   { versionKey: false, timestamps: true }
 )
 
-const UserModel = model<IUser>('userModel', userSchema)
+const UserModel = model<IUser>('UserModel', userSchema)
 export default UserModel

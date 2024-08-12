@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express'
 import authService from '../services/auth.service'
 import { catchAsync } from '~/utils/catchAsync'
-import AccountModel from '~/models/database/accounts.models'
+import UserModel from '~/models/database/users.models'
 import { response200, response201, response400, response500 } from '~/utils/apiResponse'
 import jsonRes from '~/utils/jsonRes'
-import passport from '~/services/passport-google.service'
+import passport from 'passport'
 
 const AuthController = {
   registerController: async (req: Request, res: Response, next: NextFunction) => {
@@ -64,7 +64,7 @@ const AuthController = {
       }
       const { accessToken, refreshToken } = await authService.generateTokens(user._id)
       //const { _id, fullname, avatarUrl, phone, nationCode, address, city, country, state } = user
-      await AccountModel.updateOne({ email }, { isActive: true, $push: { refreshTokens: refreshToken } })
+      await UserModel.updateOne({ email }, { isActive: true, $push: { refreshTokens: refreshToken } })
       // return res.status(200).json({
       //   message: 'Activate successfully !!!',
       //   accessToken,
