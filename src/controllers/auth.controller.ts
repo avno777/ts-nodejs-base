@@ -181,6 +181,11 @@ const AuthController = {
   sendOtpForGot: async (req: Request, res: Response): Promise<Response | void> => {
     try {
       const { email } = req.body
+      const user = await authService.findByKeyword({ email }, 'email')
+      if (!user) {
+        //return res.status(404).json({ message: 'Email not found' })
+        return response400(res, jsonRes.ACCOUNT_NOT_REGISTERED)
+      }
       // const { error } = await emailSchema.validate({ email })
       // if (error) return response400(res, jsonRes.INVALID_INFORMATION)
       await authService.otpForGot(email)
