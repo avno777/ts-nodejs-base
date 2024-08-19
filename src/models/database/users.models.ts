@@ -44,9 +44,9 @@ const userSchema: Schema = new Schema(
       index: true
     },
     googleId: { type: String },
+    avatarUrl: { type: String },
     password: {
-      type: String,
-      required: true
+      type: String
     },
     role: {
       type: String,

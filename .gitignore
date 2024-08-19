@@ -9,5 +9,6 @@ dist/
 privateKey.pem
 
 # Logs
+
 combined.log
 error.log

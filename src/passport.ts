@@ -3,12 +3,13 @@ import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
 import dotenv from 'dotenv'
 import UserModel from './models/database/users.models'
 dotenv.config()
+const host = process.env.HOST || 'localhost'
 passport.use(
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-      callbackURL: '/v1/api/auth/google/callback'
+      callbackURL: `http://localhost:6061/v1/api/auth/google/callback`
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
@@ -19,7 +20,7 @@ passport.use(
           return done(null, existingUser)
         }
 
-        const newUser = new UserModel({
+        const user = new UserModel({
           fullname: profile.displayName,
           displayName: profile.displayName,
           email: profile.emails?.[0].value,
@@ -28,25 +29,25 @@ passport.use(
           role: 'User'
         })
 
-        await newUser.save()
-        done(null, newUser)
+        await user.save()
+        return done(undefined, user)
       } catch (err) {
-        done(err, undefined)
+        return done(err, undefined)
       }
     }
   )
 )
 
 passport.serializeUser((user, done) => {
-  done(null, (user as any)._id)
+  return done(null, (user as any)._id)
 })
 
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await UserModel.findById(id)
-    done(null, user)
+    return done(null, user)
   } catch (err) {
-    done(err, undefined)
+    return done(err, undefined)
   }
 })
 

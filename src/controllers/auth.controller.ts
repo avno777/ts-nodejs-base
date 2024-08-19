@@ -236,26 +236,29 @@ const AuthController = {
 
   googleCallback: (req: Request, res: Response, next: NextFunction) => {
     passport.authenticate('google', { session: false }, async (err, user, info) => {
-      if (err || !user) {
-        // Trường hợp xác thực không thành công
+      if (err) {
+        console.error('Error during Google authentication:', err)
+        return res.status(401).json({ message: 'Google authentication failed' })
+      }
+
+      if (!user) {
+        console.error('No user found after Google authentication.')
         return res.status(401).json({ message: 'Google authentication failed' })
       }
 
       try {
-        // Trường hợp xác thực thành công
+        console.log('Authenticated user:', user)
         const { accessToken, refreshToken } = await authService.generateTokens(user._id)
 
-        // Lưu refreshToken vào cơ sở dữ liệu
         await authService.pushRefreshToken(user._id, refreshToken)
 
-        // Gửi response với mã HTTP 200 và JSON chứa token
         return res.status(200).json({
           message: 'Google authentication successful',
           accessToken,
           refreshToken
         })
       } catch (error) {
-        // Xử lý lỗi khi tạo token hoặc lưu vào cơ sở dữ liệu
+        console.error('Error during token generation or saving:', error)
         return res.status(500).json({ message: 'Internal Server Error' })
       }
     })(req, res, next)

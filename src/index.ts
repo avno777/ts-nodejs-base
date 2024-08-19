@@ -6,13 +6,13 @@ import YAML from 'yamljs'
 import swaggerUi from 'swagger-ui-express'
 import dotenv from 'dotenv'
 import session from 'express-session'
-import passport from 'passport'
+//import passport from 'passport'
 import routes from './routes'
 import { config } from './configs/config'
 import dbConnection from './configs/dbConnection'
 import authLimiter from './middlewares/rateLimit.middleware'
 import './utils/genKey'
-import './passport'
+import passport from './passport'
 dotenv.config()
 
 const port: string | number = config.port || 6060
@@ -46,6 +46,7 @@ app.use(
   })
 )
 app.use(passport.initialize())
+app.use(passport.session())
 //app.use(passport.authenticate('session'))
 app.use(compression())
 app.use('/v1/api', routes)
