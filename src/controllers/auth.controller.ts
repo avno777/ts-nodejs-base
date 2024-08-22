@@ -93,6 +93,7 @@ const AuthController = {
         //return res.status(400).json({ message: 'Account is not activated !!!' })
         return response400(res, jsonRes.ACCOUNT_NOT_ACTIVATED)
       }
+      console.log(await authService.isPasswordMatch(user, password))
       if (!(await authService.isPasswordMatch(user, password))) {
         //return res.status(402).json({ message: 'Invalid password' })
         return response400(res, jsonRes.PASSWORD_INCORRECT)

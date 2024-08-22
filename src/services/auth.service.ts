@@ -53,7 +53,8 @@ const AuthService = {
   },
 
   isPasswordMatch: (user: IUser, password: string) => {
-    return bcrypt.compareSync(password, user.password as string)
+    console.log('111111', password)
+    return bcrypt.compare(password, user.password as string)
   },
 
   findByKeyword: async (keyword: object, fields: string): Promise<IUser | null> => {
@@ -179,8 +180,7 @@ const AuthService = {
 
   changePassword: async (email: string, password: string) => {
     try {
-      const hashPassword = await AuthService.hashedPassword(password)
-      await userModel.updateOne({ email }, { password: hashPassword })
+      await userModel.updateOne({ email }, { password: password })
     } catch (error) {
       console.error('Error changing password:', error)
       throw new Error('Failed to change password')
