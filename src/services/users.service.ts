@@ -1,5 +1,6 @@
 import { Request } from 'express'
-import accountModel from '../models/database/accounts.models'
+import userModel from '../models/database/users.model'
+import { IUser } from '../models/database/users.model'
 import logger from '../configs/logger'
 import { FilterQuery } from 'mongoose'
 import { IRequest } from '~/models/interfaces/req.interface'
@@ -24,7 +25,7 @@ interface RequestWithUser extends Request {
 const AccountService: IAccountService = {
   async createData(data: any) {
     try {
-      const createdData = await accountModel.create(data)
+      const createdData = await userModel.create(data)
       return createdData
     } catch (error) {
       logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
@@ -32,20 +33,16 @@ const AccountService: IAccountService = {
     }
   },
   async getData(req: Request) {
-    const allowedFields = ['fullname', 'email', 'phone', 'address']
+    const allowedFields = ['fullname', 'displayName', 'email', 'phone']
     const page = parseInt(req.query.page as string) || 1
     const limit = parseInt(req.query.limit as string) || 10
     const skip = (page - 1) * limit
 
     const conditions: FilterQuery<any>[] = allowedFields
       .map((field) => {
-        if (field === 'fullName' || field === 'email' || field === 'phone' || field === 'address') {
+        if (field === 'fullName' || field === 'email' || field === 'phone' || field === 'displayName') {
           if (req.query[field]) {
             return { [field]: { $regex: req.query[field], $options: 'i' } }
-          }
-        } else if (field === 'allowedElevator') {
-          if (req.query[field]) {
-            return { [field]: { $in: [req.query[field]] } }
           }
         } else if (req.query[field]) {
           return { [field]: req.query[field] }
@@ -65,8 +62,8 @@ const AccountService: IAccountService = {
       })
     }
 
-    const _data = await accountModel.find({ $and: conditions }).skip(skip).limit(limit).lean().exec()
-    const count = await accountModel.countDocuments({ $and: conditions })
+    const _data = await userModel.find({ $and: conditions }).skip(skip).limit(limit).lean().exec()
+    const count = await userModel.countDocuments({ $and: conditions })
     const totalPages = Math.ceil(count / limit)
     return {
       total: count,
@@ -79,7 +76,7 @@ const AccountService: IAccountService = {
 
   async getDataById(_id: string) {
     try {
-      const data = await accountModel.findById(_id)
+      const data = await userModel.findById(_id)
       return data
     } catch (error) {
       logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
@@ -89,7 +86,7 @@ const AccountService: IAccountService = {
   async updateDataById(_id: string, req: Request) {
     try {
       const data = req.body
-      const updatedData = await accountModel.findByIdAndUpdate(_id, data, { new: true })
+      const updatedData = await userModel.findByIdAndUpdate(_id, data, { new: true })
       return updatedData
     } catch (error) {
       logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
@@ -100,7 +97,7 @@ const AccountService: IAccountService = {
   async deleteDataById(req: IRequest) {
     try {
       const dataId = req.user?._id ?? ''
-      await accountModel.findByIdAndDelete(dataId)
+      await userModel.findByIdAndDelete(dataId)
     } catch (error) {
       logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
       throw error

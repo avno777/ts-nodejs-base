@@ -7,12 +7,14 @@ interface INotification extends Document {
   isRead: boolean
 }
 
-const NotificationSchema = new Schema<INotification>({
-  userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  message: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now },
-  isRead: { type: Boolean, default: false }
-})
+const NotificationSchema = new Schema<INotification>(
+  {
+    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    message: { type: String, required: true },
+    isRead: { type: Boolean, default: false }
+  },
+  { versionKey: false, timestamps: true }
+)
 
 const Notification = model<INotification>('Notification', NotificationSchema)
 export default Notification

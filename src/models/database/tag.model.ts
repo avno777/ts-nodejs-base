@@ -5,10 +5,13 @@ interface ITag extends Document {
   createdBy: ObjectId
 }
 
-const TagSchema = new Schema<ITag>({
-  name: { type: String, required: true },
-  createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true }
-})
+const TagSchema = new Schema<ITag>(
+  {
+    name: { type: String, required: true },
+    createdBy: { type: Schema.Types.ObjectId, ref: 'User', required: true }
+  },
+  { versionKey: false, timestamps: true }
+)
 
 const Tag = model<ITag>('Tag', TagSchema)
 export default Tag

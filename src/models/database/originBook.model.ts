@@ -28,11 +28,14 @@ const ChapterSchema = new Schema<IChapter>({
   ]
 })
 
-const OriginalBookSchema = new Schema<IOriginalBook>({
-  title: { type: String, required: true },
-  author: { type: String, required: true },
-  chapters: [ChapterSchema]
-})
+const OriginalBookSchema = new Schema<IOriginalBook>(
+  {
+    title: { type: String, required: true },
+    author: { type: String, required: true },
+    chapters: [ChapterSchema]
+  },
+  { versionKey: false, timestamps: true }
+)
 
 const OriginalBook = model<IOriginalBook>('OriginalBook', OriginalBookSchema)
 export default OriginalBook

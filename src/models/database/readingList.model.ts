@@ -6,11 +6,14 @@ interface IReadingList extends Document {
   chapters: ObjectId[]
 }
 
-const ReadingListSchema = new Schema<IReadingList>({
-  userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  listName: { type: String, required: true },
-  chapters: [{ type: Schema.Types.ObjectId, ref: 'UserChapter' }]
-})
+const ReadingListSchema = new Schema<IReadingList>(
+  {
+    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    listName: { type: String, required: true },
+    chapters: [{ type: Schema.Types.ObjectId, ref: 'UserChapter' }]
+  },
+  { versionKey: false, timestamps: true }
+)
 
 const ReadingList = model<IReadingList>('ReadingList', ReadingListSchema)
 export default ReadingList

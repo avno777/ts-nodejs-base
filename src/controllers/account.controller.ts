@@ -29,10 +29,10 @@ const AccountController = {
         res.status(404).json({ message: 'Data not found' })
         response400(res, jsonRes.USER_NOT_FOUND)
       }
-      const { _id, fullname, email, avatarUrl, phone, nationCode, address, city, country, state } = user
+      const { _id, fullname, email, avatarUrl, phone } = user
       res.status(200).json({
         message: 'Get data successfully',
-        data: { _id, fullname, email, avatarUrl, phone, nationCode, address, city, country, state }
+        data: { _id, fullname, email, avatarUrl, phone }
       })
     } catch (error: any) {
       response500(res, jsonRes.INTERNAL_SERVER_ERROR)

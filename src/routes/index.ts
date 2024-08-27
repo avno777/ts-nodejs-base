@@ -8,6 +8,7 @@ import inventoryRoute from './inventory.route'
 import invoiceRoute from './invoice.route'
 import productRoute from './product.route'
 import supplierRoute from './supplier.route'
+import originBookRoute from './originBook.route'
 
 const router: Router = express.Router()
 
@@ -25,7 +26,8 @@ const defaultRoutes: Route[] = [
   { path: '/inventory', route: inventoryRoute },
   { path: '/invoice', route: invoiceRoute },
   { path: '/product', route: productRoute },
-  { path: '/supplier', route: supplierRoute }
+  { path: '/supplier', route: supplierRoute },
+  { path: '/origin-book', route: originBookRoute }
 ]
 
 defaultRoutes.forEach((route: Route) => {
