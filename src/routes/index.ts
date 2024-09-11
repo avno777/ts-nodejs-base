@@ -9,6 +9,7 @@ import invoiceRoute from './invoice.route'
 import productRoute from './product.route'
 import supplierRoute from './supplier.route'
 import originBookRoute from './originBook.route'
+import authorRoute from './author.route'
 
 const router: Router = express.Router()
 
@@ -20,6 +21,7 @@ interface Route {
 const defaultRoutes: Route[] = [
   { path: '/account', route: accountRoute },
   { path: '/auth', route: authRoute },
+  { path: '/author', route: authorRoute },
   { path: '/customer', route: customerRoute },
   { path: '/order', route: orderRoute },
   { path: '/driver', route: driverRoute },

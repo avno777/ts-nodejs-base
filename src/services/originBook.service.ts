@@ -1,10 +1,12 @@
 import { Request } from 'express'
-import originBookModel from '../models/database/originBook.model'
+import originBookModel, { IOriginalBook } from '../models/database/originBook.model'
 import logger from '../configs/logger'
 import { FilterQuery } from 'mongoose'
+import { processPDF } from '~/utils/pgfProcessor'
 
 interface IOriginBookService {
   createData(data: any): Promise<any>
+  createByFile(filePath: string, req: Request): Promise<any>
   getData(req: Request): Promise<{ total: number; data: any[] }>
   getDataById(req: Request): Promise<any>
   updateDataById(req: Request): Promise<any>
@@ -16,6 +18,24 @@ const OriginBookService: IOriginBookService = {
       const createdData = await originBookModel.create(data)
       return createdData
     } catch (error) {
+      logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
+      throw error
+    }
+  },
+  async createByFile(filePath, req) {
+    try {
+      const chapterData = await processPDF(filePath)
+      const bookData = {
+        title: req.body.title, // Cập nhật title dựa trên nội dung thực tế
+        author: req.body.author,
+        imageCovers: req.body.imageCovers, // Gán authorId thực tế
+        chapters: chapterData,
+        description: 'Mô tả sách từ PDF'
+      }
+      // Lưu dữ liệu vào cơ sở dữ liệu
+      const originalBook = await originBookModel.create(bookData)
+      return originalBook
+    } catch (error: any) {
       logger.error('Error creating data:', error) // Xử lý lỗi cụ thể
       throw error
     }
@@ -49,8 +69,13 @@ const OriginBookService: IOriginBookService = {
         }
       })
     }
-
-    const _data = await originBookModel.find({ $and: conditions }).skip(skip).limit(limit).lean().exec()
+    const projection = {
+      title: 1,
+      author: 1,
+      images: 1,
+      description: 1
+    }
+    const _data = await originBookModel.find({ $and: conditions }, projection).skip(skip).limit(limit).lean().exec()
     const count = await originBookModel.countDocuments({ $and: conditions })
     const totalPages = Math.ceil(count / limit)
     return {

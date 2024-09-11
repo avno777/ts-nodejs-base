@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import { JwtPayload } from 'jsonwebtoken'
 import authService from '../services/auth.service'
-import { IUser } from '../models/database/users.models'
+import { IUser } from '../models/database/users.model'
 import { IRequest } from '~/models/interfaces/req.interface'
 import { response400, response401, response403, response500 } from '~/utils/apiResponse'
 import jsonRes from '~/utils/jsonRes'

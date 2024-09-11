@@ -1,7 +1,7 @@
 import { Schema, model, Document, ObjectId } from 'mongoose'
 
-interface IChapter {
-  chapterNumber: number
+export interface IChapter {
+  chapterNumber: string
   title: string
   content: string
   images: {
@@ -10,14 +10,16 @@ interface IChapter {
   }[]
 }
 
-interface IOriginalBook extends Document {
+export interface IOriginalBook extends Document {
   title: string
-  author: string
+  author?: string
+  imageCovers: string
   chapters: IChapter[]
+  description: string
 }
 
 const ChapterSchema = new Schema<IChapter>({
-  chapterNumber: { type: Number, required: true },
+  chapterNumber: { type: String, required: true },
   title: { type: String, required: true },
   content: { type: String, required: true },
   images: [
@@ -32,7 +34,9 @@ const OriginalBookSchema = new Schema<IOriginalBook>(
   {
     title: { type: String, required: true },
     author: { type: String, required: true },
-    chapters: [ChapterSchema]
+    imageCovers: { type: String },
+    chapters: [ChapterSchema],
+    description: { type: String }
   },
   { versionKey: false, timestamps: true }
 )

@@ -11,6 +11,21 @@ const OriginBookController = {
       res.status(500).json({ error: error.message })
     }
   },
+  createByFile: async function (req: Request, res: Response) {
+    try {
+      const filePath = req.file?.path
+      if (!filePath) {
+        return res.status(400).json({ error: 'No file uploaded' })
+      }
+
+      const bookData = await OriginBookService.createByFile(filePath, req)
+      // const originalBook = new OriginalBook(bookData)
+      // await originalBook.save()
+      res.status(200).json({ message: 'File processed and data saved successfully' })
+    } catch (error) {
+      res.status(500).json({ error: 'An error occurred while processing the PDF file' })
+    }
+  },
   getData: async function (req: IRequest, res: Response): Promise<void> {
     try {
       const _data = await OriginBookService.getData(req)

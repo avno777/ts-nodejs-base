@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import authService from '../services/auth.service'
 import { catchAsync } from '~/utils/catchAsync'
-import UserModel from '~/models/database/users.models'
+import UserModel from '~/models/database/users.model'
 import { response200, response201, response400, response500 } from '~/utils/apiResponse'
 import jsonRes from '~/utils/jsonRes'
 import passport from 'passport'

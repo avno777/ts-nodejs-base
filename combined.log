@@ -34,3 +34,44 @@
 2024-08-23 00:19:38 info: Connected to redis server
 2024-08-23 00:22:45 info: Connected to redis server
 2024-08-23 00:30:36 info: Connected to redis server
+2024-08-31 16:09:26 info: Connected to redis server
+2024-08-31 16:46:15 info: Connected to redis server
+2024-09-01 18:05:18 info: Connected to redis server
+2024-09-04 10:53:25 info: Connected to redis server
+2024-09-04 11:11:32 info: Connected to redis server
+2024-09-04 11:12:11 error: Error creating data: OriginalBook validation failed: chapters.0.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.1.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.2.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.3.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.4.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.5.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.6.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.7.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.8.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.9.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.10.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.11.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.12.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.13.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.14.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.15.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.16.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber"
+2024-09-04 11:13:02 info: Connected to redis server
+2024-09-04 11:15:47 error: Error creating data: OriginalBook validation failed: chapters.0.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.1.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.2.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.3.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.4.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.5.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.6.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.7.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.8.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.9.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.10.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.11.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.12.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.13.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.14.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.15.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.16.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber"
+2024-09-04 11:17:59 info: Connected to redis server
+2024-09-04 11:19:23 error: Error creating data: OriginalBook validation failed: chapters.0.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.1.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.2.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.3.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.4.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.5.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.6.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.7.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.8.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.9.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.10.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.11.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.12.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.13.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.14.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.15.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber", chapters.16.chapterNumber: Cast to Number failed for value "NaN" (type number) at path "chapterNumber"
+2024-09-04 11:20:16 info: Connected to redis server
+2024-09-04 11:30:57 info: Connected to redis server
+2024-09-04 11:32:40 info: Connected to redis server
+2024-09-04 11:48:46 info: Connected to redis server
+2024-09-04 14:17:49 info: Connected to redis server
+2024-09-04 14:43:07 info: Connected to redis server
+2024-09-05 14:18:55 info: Connected to redis server
+2024-09-08 21:36:44 info: Connected to redis server
+2024-09-08 22:10:23 info: Connected to redis server
+2024-09-08 22:49:43 info: Connected to redis server
+2024-09-08 23:36:42 info: Connected to redis server
+2024-09-08 23:45:43 info: Connected to redis server
+2024-09-08 23:50:18 info: Connected to redis server
+2024-09-08 23:53:58 info: Connected to redis server
+2024-09-08 23:56:08 error: Error creating data: OriginalBook validation failed: title: Path `title` is required., author: Path `author` is required.
+2024-09-08 23:57:44 info: Connected to redis server
+2024-09-08 23:58:49 error: Error creating data: OriginalBook validation failed: title: Path `title` is required., author: Path `author` is required.
+2024-09-09 08:41:00 info: Connected to redis server
+2024-09-09 08:42:13 error: Error creating data: OriginalBook validation failed: title: Path `title` is required., author: Path `author` is required.
+2024-09-09 08:43:59 info: Connected to redis server
+2024-09-09 08:45:18 info: Connected to redis server
+2024-09-09 08:45:57 error: Error creating data: OriginalBook validation failed: title: Path `title` is required., author: Path `author` is required.
+2024-09-09 08:49:15 info: Connected to redis server
+2024-09-09 08:54:52 info: Connected to redis server
+2024-09-09 09:00:08 info: Connected to redis server
+2024-09-09 09:14:18 info: Connected to redis server
+2024-09-09 09:17:40 info: Connected to redis server
+2024-09-09 09:20:04 info: Connected to redis server
+2024-09-09 09:23:24 info: Connected to redis server
+2024-09-09 09:26:43 info: Connected to redis server
+2024-09-09 09:42:29 info: Connected to redis server
